@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>وظائف التكنولوجيا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <nav class="navbar">
+      <div class="logo">💻 TechCareers</div>
+      <ul class="nav-links">
+        <li><a href="#jobs">الوظائف</a></li>
+        <li><a href="#about">من نحن</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+      <button class="nav-cta">ابدأ الآن</button>
+    </nav>
+    <div class="hero-content">
+      <span class="badge">🚀 مستقبلك في التكنولوجيا يبدأ هنا</span>
+      <h1>اكتشف وظائف<br/><span class="highlight">التكنولوجيا</span></h1>
+      <p>تعرّف على أهم الوظائف التقنية — ما تتطلبه، أفضل الكورسات، والشركات التي توظّف.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollToJobs()">استكشف الوظائف ↓</button>
+        <button class="btn-secondary">شاهد الفيديو ▶</button>
+      </div>
+      <div class="stats">
+        <div class="stat"><strong>+6</strong><span>وظيفة مشروحة</span></div>
+        <div class="stat"><strong>+50</strong><span>كورس موصى به</span></div>
+        <div class="stat"><strong>+30</strong><span>شركة عالمية</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SEARCH -->
+  <section class="search-section">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="ابحث عن وظيفة... مثال: مطور، ذكاء اصطناعي" oninput="filterJobs()"/>
+      <button onclick="clearSearch()">✕</button>
+    </div>
+    <div class="filter-tags">
+      <button class="tag active" onclick="setFilter('all', this)">الكل</button>
+      <button class="tag" onclick="setFilter('dev', this)">تطوير</button>
+      <button class="tag" onclick="setFilter('data', this)">بيانات</button>
+      <button class="tag" onclick="setFilter('security', this)">أمن</button>
+      <button class="tag" onclick="setFilter('design', this)">تصميم</button>
+    </div>
+  </section>
+
+  <!-- JOBS GRID -->
+  <section class="jobs-section" id="jobs">
+    <h2 class="section-title">وظائف التكنولوجيا</h2>
+    <p class="section-sub">اضغط على أي وظيفة لتعرف كل تفاصيلها</p>
+    <div class="jobs-grid" id="jobsGrid"></div>
+  </section>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" id="modal" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <span class="modal-icon" id="mIcon"></span>
+        <div>
+          <h2 id="mTitle"></h2>
+          <span class="modal-badge" id="mCategory"></span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section">
+          <h3>📋 عن الوظيفة</h3>
+          <p id="mDesc"></p>
+        </div>
+        <div class="modal-section">
+          <h3>🛠️ المهارات المطلوبة</h3>
+          <div class="skills-list" id="mSkills"></div>
+        </div>
+        <div class="modal-section">
+          <h3>📚 أفضل الكورسات</h3>
+          <ul class="courses-list" id="mCourses"></ul>
+        </div>
+        <div class="modal-section">
+          <h3>🏢 شركات توظّف</h3>
+          <div class="companies-list" id="mCompanies"></div>
+        </div>
+        <div class="modal-section salary-section">
+          <h3>💰 الراتب المتوقع</h3>
+          <div class="salary-bar">
+            <span id="mSalaryMin"></span>
+            <div class="bar-track"><div class="bar-fill" id="mSalaryBar"></div></div>
+            <span id="mSalaryMax"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <h2>لماذا TechCareers؟</h2>
+      <p>نساعدك تختار مسارك التقني بثقة — بمعلومات حقيقية عن السوق والكورسات والشركات.</p>
+      <div class="about-cards">
+        <div class="about-card">🎯<h4>دليل واضح</h4><p>كل وظيفة مشروحة بالتفصيل من الألف للياء</p></div>
+        <div class="about-card">📈<h4>سوق حقيقي</h4><p>أرقام رواتب وشركات فعلية توظّف الآن</p></div>
+        <div class="about-card">🎓<h4>كورسات موثوقة</h4><p>أفضل المنصات العالمية والعربية</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <h2>تواصل معنا</h2>
+    <p>عندك سؤال؟ ابعتلنا وهنرد عليك.</p>
+    <div class="contact-form">
+      <input type="text" id="cName" placeholder="اسمك"/>
+      <input type="email" id="cEmail" placeholder="إيميلك"/>
+      <textarea id="cMsg" placeholder="رسالتك..."></textarea>
+      <button class="btn-primary" onclick="submitForm()">إرسال الرسالة</button>
+      <div id="formMsg" class="form-success" style="display:none">✅ تم إرسال رسالتك بنجاح!</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 TechCareers — كل الحقوق محفوظة</p>
+    <p>صُنع بـ HTML, CSS & JavaScript ❤️</p>
+  </footer>
+
+
+  <!-- CHATBOT -->
+  <button class="chat-fab" id="chatBtn" onclick="toggleChat()">💬</button>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <span class="chat-bot-avatar">🤖</span>
+        <div>
+          <strong>تك بوت</strong>
+          <span class="chat-status">● متاح الآن</span>
+        </div>
+      </div>
+      <button class="chat-close-btn" onclick="toggleChat()">✕</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-row">
+      <input type="text" id="chatInput" placeholder="اسألني عن أي وظيفة..." onkeydown="chatKeydown(event)"/>
+      <button id="chatSendBtn" onclick="sendChat()">↑</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
